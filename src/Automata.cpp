@@ -95,17 +95,14 @@ bool Automata::ProcessOrder(int numDrink) {
     if (State != ACCEPT) {
         return false;
     }
-    
     Choice(numDrink);
     if (State != CHECK) {
         return false;
     }
-    
     if (!Check()) {
         return false;
     }
-    
     Cook();
     Finish();
     return true;
-} 
+}

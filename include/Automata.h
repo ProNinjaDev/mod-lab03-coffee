@@ -15,14 +15,14 @@ enum STATES {
 };
 
 class Automata {
-private:
+ private:
     int Cash;
     std::vector<std::string> Menu;
     std::vector<int> Prices;
     STATES State;
     int SelectedDrink;
 
-public:
+ public:
     Automata();
     void On();
     void Off();
@@ -37,4 +37,4 @@ public:
     bool ProcessOrder(int numDrink);
 };
 
-#endif
+#endif  // INCLUDE_AUTOMATA_H_
