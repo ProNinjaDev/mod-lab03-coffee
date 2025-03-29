@@ -1,5 +1,7 @@
 // Copyright 2024 UNN-IASR
 
+#include <string>
+#include <vector>
 #include <gtest/gtest.h>
 #include "../include/Automata.h"
 
@@ -78,10 +80,8 @@ TEST(AutomataTest, CompleteOrderSequence) {
     Automata coffeeMachine;
     coffeeMachine.On();
     EXPECT_EQ(coffeeMachine.GetState(), WAIT);
-    
     coffeeMachine.Coin(200);
     EXPECT_EQ(coffeeMachine.GetState(), ACCEPT);
-    
     EXPECT_TRUE(coffeeMachine.ProcessOrder(2));
     EXPECT_EQ(coffeeMachine.GetState(), WAIT);
 }
