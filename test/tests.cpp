@@ -1,8 +1,8 @@
 // Copyright 2024 UNN-IASR
 
+#include <gtest/gtest.h>
 #include <string>
 #include <vector>
-#include <gtest/gtest.h>
 #include "../include/Automata.h"
 
 TEST(AutomataTest, Initialization) {
