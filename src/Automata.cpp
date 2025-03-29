@@ -1,8 +1,27 @@
+// Copyright 2024 UNN-IASR
+
+#include <string>
+#include <vector>
 #include "../include/Automata.h"
 
 Automata::Automata() {
     Cash = 0;
     State = OFF;
+    SelectedDrink = -1;
+
+    Menu = {
+        "Espresso",
+        "Americano",
+        "Cappuccino",
+        "Latte"
+    };
+
+    Prices = {
+        100,
+        150,
+        200,
+        250
+    };
 }
 
 void Automata::On() {
@@ -30,13 +49,23 @@ STATES Automata::GetState() {
 
 void Automata::Choice(int numDrink) {
     if (State == ACCEPT) {
-        State = CHECK;
+        if (numDrink >= 0 && numDrink < Menu.size()) {
+            SelectedDrink = numDrink;
+            State = CHECK;
+        }
     }
 }
 
 bool Automata::Check() {
     if (State == CHECK) {
-        return true;
+        if (SelectedDrink >= 0 && SelectedDrink < Prices.size()) {
+            if (Cash >= Prices[SelectedDrink]) {
+                Cash -= Prices[SelectedDrink];
+                return true;
+            }
+        }
+        State = WAIT;
+        return false;
     }
     return false;
 }
@@ -55,6 +84,28 @@ void Automata::Cook() {
 }
 
 void Automata::Finish() {
-    Cash = 0;
-    State = WAIT;
+    if (State == COOK) {
+        Cash = 0;
+        SelectedDrink = -1;
+        State = WAIT;
+    }
+}
+
+bool Automata::ProcessOrder(int numDrink) {
+    if (State != ACCEPT) {
+        return false;
+    }
+    
+    Choice(numDrink);
+    if (State != CHECK) {
+        return false;
+    }
+    
+    if (!Check()) {
+        return false;
+    }
+    
+    Cook();
+    Finish();
+    return true;
 } 

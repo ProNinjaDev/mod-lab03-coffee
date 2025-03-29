@@ -1,5 +1,7 @@
-#ifndef AUTOMATA_H
-#define AUTOMATA_H
+// Copyright 2024 UNN-IASR
+
+#ifndef INCLUDE_AUTOMATA_H_
+#define INCLUDE_AUTOMATA_H_
 
 #include <string>
 #include <vector>
@@ -18,6 +20,7 @@ private:
     std::vector<std::string> Menu;
     std::vector<int> Prices;
     STATES State;
+    int SelectedDrink;
 
 public:
     Automata();
@@ -31,6 +34,7 @@ public:
     void Cancel();
     void Cook();
     void Finish();
+    bool ProcessOrder(int numDrink);
 };
 
 #endif
